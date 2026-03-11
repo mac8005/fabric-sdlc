@@ -244,19 +244,37 @@ Read:
 Produce these deliverables:
 
 1. `docs/04-test-plan.md` — Test strategy
-   - Test types: unit, integration, e2e (as applicable)
+   - Test types: unit, integration, e2e, frontend/component (as applicable)
    - Coverage targets
    - Test environment setup
+   - E2E testing approach (Playwright for web apps)
 
 2. Write actual test files in `tests/`
-   - Unit tests for core business logic
-   - Integration tests for API endpoints (if applicable)
+   - `tests/unit/` — Unit tests for core business logic
+   - `tests/integration/` — Integration tests for API endpoints (if applicable)
+   - `tests/e2e/` — End-to-end tests using Playwright (if the app has a UI or API)
+     - Install Playwright: `npm init playwright@latest` or add to dependencies
+     - Write e2e tests covering critical user flows from user stories
+     - Test navigation, form submissions, authentication flows, error states
+     - Include accessibility checks using `@axe-core/playwright` if UI exists
+   - `tests/frontend/` — Frontend component tests (if the app has a UI)
+     - Test UI components in isolation (rendering, interactions, state changes)
+     - Test responsive behavior at key breakpoints
+     - Test form validation and error display
    - Test each acceptance criterion from user stories
+   - Map every test to its requirement/user story ID with a comment
 
 3. Run all tests using Bash and capture results
+   - Run unit and integration tests with the project's test runner
+   - Run Playwright e2e tests: `npx playwright test`
+   - If Playwright browsers aren't installed, run `npx playwright install --with-deps`
 
 4. `docs/04-test-results.md` — Test results
-   - Test execution summary (pass/fail/skip counts)
+   - Test execution summary (pass/fail/skip counts) broken down by test type
+   - Unit test results
+   - Integration test results
+   - E2E test results (include Playwright HTML report if generated)
+   - Frontend test results
    - Failed test details with error messages
    - Coverage report (if tooling available)
    - Issues found, each with:
