@@ -13,7 +13,7 @@
       "author": {
         "name": "Massimo"
       },
-      "source": ".",
+      "source": "./plugins/fabric-sdlc",
       "category": "development",
       "homepage": "https://github.com/mac8005/fabric-sdlc"
     }
