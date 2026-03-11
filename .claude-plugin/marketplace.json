@@ -9,7 +9,7 @@
     {
       "name": "fabric-sdlc",
       "description": "The Fabric — autonomous 8-agent SDLC team that transforms a business objective into a working application with full documentation, testing, security review, and deployment setup.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Massimo"
       },
