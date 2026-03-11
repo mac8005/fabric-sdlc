@@ -1,6 +1,6 @@
 {
   "name": "fabric-sdlc",
-  "description": "The Fabric — an autonomous 8-agent SDLC team that transforms a business objective into a working application with full documentation, testing, and deployment setup.",
+  "description": "The Fabric — autonomous SDLC agent team bundled with document processing, design, and developer skills from Anthropic's official skills collection.",
   "author": {
     "name": "Massimo",
     "email": ""
