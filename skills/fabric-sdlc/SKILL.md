@@ -88,6 +88,8 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read `docs/00-project-charter.md` to understand the business objective.
 
+SKILL INTEGRATION: Before writing deliverables, invoke the Skill tool with skill='doc-coauthoring' to load structured documentation guidance. Use its context-gathering and reader-testing methodology to produce clearer, better-structured requirements.
+
 Produce these deliverables:
 
 1. `docs/01-requirements.md` — Functional and non-functional requirements
@@ -145,6 +147,8 @@ Produce these deliverables:
    - Error response format
    - Example requests and responses
 
+SKILL INTEGRATION: If the app includes architecture diagrams or visual documentation, invoke the Skill tool with skill='canvas-design' to generate polished architecture diagrams as PNG/PDF files.
+
 Design for simplicity. Choose mature, well-documented technologies. Avoid over-engineering.
 ```
 
@@ -155,6 +159,13 @@ You are the UX/UI Engineer for The Fabric SDLC team.
 WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read `docs/01-requirements.md` and `docs/01-user-stories.md`.
+
+SKILL INTEGRATION (invoke these via the Skill tool before starting your work):
+- ALWAYS invoke skill='frontend-design' to load specialized design guidance. Follow its principles to create distinctive, non-generic interfaces that avoid typical AI aesthetics.
+- Invoke skill='brand-guidelines' if the project should follow Anthropic's brand styling, or use it as inspiration for professional color/typography choices.
+- Invoke skill='theme-factory' to access pre-built professional themes (colors, fonts, spacing) — select or customize one as the foundation for the design system.
+- If the project would benefit from decorative generative visuals (backgrounds, hero graphics, loading animations), invoke skill='canvas-design' to create visual assets as PNG/PDF.
+- If the project calls for interactive generative/algorithmic visual elements (particle effects, data visualizations, animated backgrounds), invoke skill='algorithmic-art' to generate p5.js-based artwork.
 
 Produce these deliverables:
 
@@ -200,6 +211,12 @@ Read ALL design documents:
 - `docs/02b-design-system.md` (if exists)
 - `docs/01-user-stories.md`
 
+SKILL INTEGRATION (invoke these via the Skill tool as applicable):
+- If the app has a web frontend, invoke skill='frontend-design' before implementing UI components. Follow its design principles for distinctive, production-grade interfaces.
+- If the app uses complex React components with state management, routing, or shadcn/ui, invoke skill='web-artifacts-builder' for specialized component architecture guidance.
+- If the app integrates with Claude/Anthropic API, invoke skill='claude-api' to load SDK best practices, streaming patterns, and tool-use guidance.
+- If the app includes an MCP server component, invoke skill='mcp-builder' to load MCP server development patterns and best practices.
+
 Implementation rules:
 1. All source code goes in `src/`
 2. Follow the architecture and tech stack exactly as specified
@@ -240,6 +257,8 @@ Read:
 - `docs/01-requirements.md` (requirements to verify)
 - `docs/03-implementation-log.md` (what was built)
 - All source code in `src/`
+
+SKILL INTEGRATION: If the app has a web UI or API, invoke the Skill tool with skill='webapp-testing' to load Playwright testing guidance, server management patterns, and reconnaissance-then-action testing methodology. Use its patterns for all e2e and frontend testing.
 
 Produce these deliverables:
 
@@ -408,6 +427,14 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read ALL documents in `docs/` and review the source code in `src/`.
 
+SKILL INTEGRATION (invoke these via the Skill tool):
+- Invoke skill='doc-coauthoring' to load structured documentation methodology. Use its context-gathering, refinement, and reader-testing patterns.
+- After writing markdown docs, invoke skill='pdf' to generate polished PDF versions of key deliverables (project summary, user guide, API docs).
+- If Word document format is needed, invoke skill='docx' to generate professional .docx files.
+- Invoke skill='xlsx' to generate a requirements traceability matrix spreadsheet mapping REQ IDs → user stories → test cases → results.
+- If a project summary presentation is useful, invoke skill='pptx' to generate a slide deck covering project overview, architecture, and key metrics.
+- If writing stakeholder communications or project status reports, invoke skill='internal-comms' for professional communication templates and formats.
+
 Produce these deliverables:
 
 1. `README.md` (project root) — Project README
@@ -438,6 +465,8 @@ After completion, update progress log and proceed to Phase 7.
 ---
 
 ### Phase 7: Final Delivery (YOU — fabric-pm)
+
+SKILL INTEGRATION: Before presenting the final summary, invoke the Skill tool with skill='internal-comms' to format the delivery summary as a professional project completion report. If presenting to stakeholders, invoke skill='pptx' to generate a final project summary presentation deck.
 
 1. **Shutdown all teammates** using `SendMessage` with `type: "shutdown_request"` for each active teammate
 2. Review ALL files in `docs/` for completeness
@@ -500,6 +529,60 @@ Example header:
 - If retry fails, document what was accomplished and what remains, then continue to the next phase
 - Never silently skip a phase — always document skips with reasons
 
+## Skill Integration
+
+The Fabric has access to sibling skills from the same marketplace. The PM (you) should instruct agents to use relevant skills when applicable. Agents invoke skills via the `Skill` tool.
+
+### Skill-to-Phase Mapping
+
+| Phase | Agent | Applicable Skills | When to Use |
+|-------|-------|-------------------|-------------|
+| 1 | fabric-ba | `doc-coauthoring` | Structure requirements docs with reader-testing methodology |
+| 2 | fabric-architect | `canvas-design` | Generate polished architecture diagrams as PNG/PDF |
+| 2 | fabric-ux | `frontend-design` | Web apps with UI — distinctive, non-generic design |
+| 2 | fabric-ux | `brand-guidelines` | Apply professional brand styling (colors, typography) |
+| 2 | fabric-ux | `theme-factory` | Select/customize from 10 pre-built professional themes |
+| 2 | fabric-ux | `canvas-design` | Generate visual mockups, diagrams, or decorative assets as PNG/PDF |
+| 2 | fabric-ux | `algorithmic-art` | Interactive generative visuals (particles, data viz, animated backgrounds) |
+| 3 | fabric-dev-lead | `frontend-design` | When implementing web frontend — avoid generic AI aesthetics |
+| 3 | fabric-dev-lead | `web-artifacts-builder` | Complex React components with state, routing, or shadcn/ui |
+| 3 | fabric-dev-lead | `claude-api` | When the app integrates with Claude/Anthropic API |
+| 3 | fabric-dev-lead | `mcp-builder` | When the app includes an MCP server component |
+| 4 | fabric-qa | `webapp-testing` | Web apps — use Playwright for e2e tests with server management patterns |
+| 6 | fabric-docs | `doc-coauthoring` | Structure documentation with reader-testing methodology |
+| 6 | fabric-docs | `pdf` | Generate polished PDF deliverables (project summary, user guide) |
+| 6 | fabric-docs | `docx` | Generate Word document deliverables |
+| 6 | fabric-docs | `xlsx` | Generate requirement traceability matrix or test coverage spreadsheet |
+| 6 | fabric-docs | `pptx` | Generate project summary presentation |
+| 6 | fabric-docs | `internal-comms` | Format stakeholder communications and status reports |
+| 7 | fabric-pm | `internal-comms` | Format final delivery summary as professional project completion report |
+| 7 | fabric-pm | `pptx` | Generate final project summary presentation for stakeholders |
+
+### How to Integrate
+
+When dispatching an agent whose phase has applicable skills:
+
+1. **Check relevance:** Does the project type match the skill's trigger? (e.g., web app → `frontend-design`, Claude API usage → `claude-api`)
+2. **Add to agent prompt:** Include an instruction like: `"If applicable, invoke the Skill tool with skill='<skill-name>' to load specialized guidance before starting that part of your work."`
+3. **Don't force it:** If the project doesn't match (e.g., CLI app → skip `frontend-design`), don't include the instruction. Only integrate skills that genuinely apply.
+
+### Example Integration in Agent Prompt
+
+For a web app project, the fabric-ux prompt would include:
+```
+Before designing the UI, invoke the Skill tool with skill='frontend-design' to load specialized design guidance. Follow its principles to create distinctive, non-generic interfaces.
+```
+
+For Phase 4 on a web app, the fabric-qa prompt would include:
+```
+For e2e testing, invoke the Skill tool with skill='webapp-testing' to load Playwright testing guidance. Use its server management and reconnaissance-then-action patterns.
+```
+
+For Phase 6, the fabric-docs prompt would include:
+```
+After writing all markdown documentation, invoke the Skill tool with skill='pdf' to generate a polished PDF project summary from the key deliverables.
+```
+
 ## Principles
 
 1. **Autonomy:** No human intervention after receiving the business objective
@@ -507,3 +590,4 @@ Example header:
 3. **Pragmatism:** Build what's needed, not what's theoretically optimal
 4. **Quality gates:** Testing and security review before deployment
 5. **Transparency:** The progress log provides a complete audit trail
+6. **Skill leverage:** Use sibling skills when they match the project type — don't reinvent what's already codified
