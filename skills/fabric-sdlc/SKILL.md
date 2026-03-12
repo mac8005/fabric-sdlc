@@ -88,7 +88,11 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read `docs/00-project-charter.md` to understand the business objective.
 
-SKILL INTEGRATION: Before writing deliverables, invoke the Skill tool with skill='doc-coauthoring' to load structured documentation guidance. Use its context-gathering and reader-testing methodology to produce clearer, better-structured requirements.
+MANDATORY FIRST STEP — do this BEFORE writing any deliverables:
+1. Invoke the Skill tool: skill='doc-coauthoring'
+2. Read the loaded skill content carefully and apply its methodology
+If the Skill tool is not available, use the Read tool to read the file at the path containing 'doc-coauthoring/SKILL.md' (search with Glob for '**/doc-coauthoring/SKILL.md').
+DO NOT skip this step. DO NOT start writing deliverables until you have loaded and read the skill.
 
 Produce these deliverables:
 
@@ -147,7 +151,11 @@ Produce these deliverables:
    - Error response format
    - Example requests and responses
 
-SKILL INTEGRATION: If the app includes architecture diagrams or visual documentation, invoke the Skill tool with skill='canvas-design' to generate polished architecture diagrams as PNG/PDF files.
+MANDATORY SKILL STEP — if the app includes architecture diagrams or visual documentation:
+1. Invoke the Skill tool: skill='canvas-design'
+2. If the Skill tool is not available, use Glob to find '**/canvas-design/SKILL.md' and Read that file
+3. Follow the loaded skill guidance to generate polished architecture diagrams as PNG/PDF files
+DO NOT skip this step if visual documentation is applicable.
 
 Design for simplicity. Choose mature, well-documented technologies. Avoid over-engineering.
 ```
@@ -160,12 +168,16 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read `docs/01-requirements.md` and `docs/01-user-stories.md`.
 
-SKILL INTEGRATION (invoke these via the Skill tool before starting your work):
-- ALWAYS invoke skill='frontend-design' to load specialized design guidance. Follow its principles to create distinctive, non-generic interfaces that avoid typical AI aesthetics.
-- Invoke skill='brand-guidelines' if the project should follow Anthropic's brand styling, or use it as inspiration for professional color/typography choices.
-- Invoke skill='theme-factory' to access pre-built professional themes (colors, fonts, spacing) — select or customize one as the foundation for the design system.
-- If the project would benefit from decorative generative visuals (backgrounds, hero graphics, loading animations), invoke skill='canvas-design' to create visual assets as PNG/PDF.
-- If the project calls for interactive generative/algorithmic visual elements (particle effects, data visualizations, animated backgrounds), invoke skill='algorithmic-art' to generate p5.js-based artwork.
+MANDATORY FIRST STEP — you MUST do this BEFORE any design work:
+1. Invoke the Skill tool: skill='frontend-design' — this is REQUIRED, not optional
+2. Invoke the Skill tool: skill='theme-factory' — to access pre-built professional themes
+3. If the project should follow Anthropic's brand styling: invoke skill='brand-guidelines'
+4. If the project needs decorative generative visuals: invoke skill='canvas-design'
+5. If the project needs interactive generative elements: invoke skill='algorithmic-art'
+
+If the Skill tool is not available for any invocation, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+
+DO NOT skip steps 1-2. DO NOT start designing until you have loaded and read the skill content. The skills contain critical design guidance that fundamentally shapes your output quality.
 
 Produce these deliverables:
 
@@ -211,11 +223,14 @@ Read ALL design documents:
 - `docs/02b-design-system.md` (if exists)
 - `docs/01-user-stories.md`
 
-SKILL INTEGRATION (invoke these via the Skill tool as applicable):
-- If the app has a web frontend, invoke skill='frontend-design' before implementing UI components. Follow its design principles for distinctive, production-grade interfaces.
-- If the app uses complex React components with state management, routing, or shadcn/ui, invoke skill='web-artifacts-builder' for specialized component architecture guidance.
-- If the app integrates with Claude/Anthropic API, invoke skill='claude-api' to load SDK best practices, streaming patterns, and tool-use guidance.
-- If the app includes an MCP server component, invoke skill='mcp-builder' to load MCP server development patterns and best practices.
+MANDATORY FIRST STEP — invoke applicable skills BEFORE writing any code:
+1. If the app has a web frontend: invoke the Skill tool with skill='frontend-design' — REQUIRED for any UI work
+2. If using complex React components (state, routing, shadcn/ui): invoke skill='web-artifacts-builder'
+3. If integrating with Claude/Anthropic API: invoke skill='claude-api'
+4. If building an MCP server component: invoke skill='mcp-builder'
+
+If the Skill tool is not available, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+DO NOT start coding until you have loaded all applicable skills. They contain implementation patterns that are critical to output quality.
 
 Implementation rules:
 1. All source code goes in `src/`
@@ -258,7 +273,11 @@ Read:
 - `docs/03-implementation-log.md` (what was built)
 - All source code in `src/`
 
-SKILL INTEGRATION: If the app has a web UI or API, invoke the Skill tool with skill='webapp-testing' to load Playwright testing guidance, server management patterns, and reconnaissance-then-action testing methodology. Use its patterns for all e2e and frontend testing.
+MANDATORY FIRST STEP — if the app has a web UI or API:
+1. Invoke the Skill tool: skill='webapp-testing' — REQUIRED before writing any tests
+2. If the Skill tool is not available, use Glob to find '**/webapp-testing/SKILL.md' and Read that file
+3. Follow its Playwright testing guidance, server management patterns, and reconnaissance-then-action methodology
+DO NOT write e2e or frontend tests without first loading this skill.
 
 Produce these deliverables:
 
@@ -427,13 +446,16 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read ALL documents in `docs/` and review the source code in `src/`.
 
-SKILL INTEGRATION (invoke these via the Skill tool):
-- Invoke skill='doc-coauthoring' to load structured documentation methodology. Use its context-gathering, refinement, and reader-testing patterns.
-- After writing markdown docs, invoke skill='pdf' to generate polished PDF versions of key deliverables (project summary, user guide, API docs).
-- If Word document format is needed, invoke skill='docx' to generate professional .docx files.
-- Invoke skill='xlsx' to generate a requirements traceability matrix spreadsheet mapping REQ IDs → user stories → test cases → results.
-- If a project summary presentation is useful, invoke skill='pptx' to generate a slide deck covering project overview, architecture, and key metrics.
-- If writing stakeholder communications or project status reports, invoke skill='internal-comms' for professional communication templates and formats.
+MANDATORY FIRST STEP — invoke these skills BEFORE writing any documentation:
+1. Invoke the Skill tool: skill='doc-coauthoring' — REQUIRED. Load its structured documentation methodology.
+2. After writing markdown docs, invoke skill='pdf' to generate polished PDF versions of key deliverables.
+3. Invoke skill='xlsx' to generate a requirements traceability matrix spreadsheet (REQ IDs → user stories → test cases → results).
+4. If Word format is needed: invoke skill='docx'
+5. If a project summary presentation is useful: invoke skill='pptx'
+6. If writing stakeholder communications: invoke skill='internal-comms'
+
+If the Skill tool is not available for any invocation, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+DO NOT skip steps 1-3. DO NOT start writing documentation until you have loaded the doc-coauthoring skill.
 
 Produce these deliverables:
 
@@ -466,7 +488,11 @@ After completion, update progress log and proceed to Phase 7.
 
 ### Phase 7: Final Delivery (YOU — fabric-pm)
 
-SKILL INTEGRATION: Before presenting the final summary, invoke the Skill tool with skill='internal-comms' to format the delivery summary as a professional project completion report. If presenting to stakeholders, invoke skill='pptx' to generate a final project summary presentation deck.
+MANDATORY SKILL STEP — do this BEFORE presenting the final summary:
+1. Invoke the Skill tool: skill='internal-comms' to format the delivery summary as a professional project completion report
+2. If presenting to stakeholders: invoke skill='pptx' to generate a final project summary presentation deck
+If the Skill tool is not available, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+DO NOT present the final summary without first loading internal-comms guidance.
 
 1. **Shutdown all teammates** using `SendMessage` with `type: "shutdown_request"` for each active teammate
 2. Review ALL files in `docs/` for completeness
@@ -560,28 +586,15 @@ The Fabric has access to sibling skills from the same marketplace. The PM (you) 
 
 ### How to Integrate
 
-When dispatching an agent whose phase has applicable skills:
+Skill invocation is **MANDATORY**, not optional. Every agent prompt already contains "MANDATORY FIRST STEP" blocks. When the PM dispatches agents:
 
-1. **Check relevance:** Does the project type match the skill's trigger? (e.g., web app → `frontend-design`, Claude API usage → `claude-api`)
-2. **Add to agent prompt:** Include an instruction like: `"If applicable, invoke the Skill tool with skill='<skill-name>' to load specialized guidance before starting that part of your work."`
-3. **Don't force it:** If the project doesn't match (e.g., CLI app → skip `frontend-design`), don't include the instruction. Only integrate skills that genuinely apply.
+1. **Check relevance:** Does the project type match the skill's trigger? (e.g., web app → `frontend-design`, CLI app → skip it)
+2. **Skills are pre-embedded:** Each agent prompt already includes mandatory skill invocation instructions — no need to add more
+3. **Fallback mechanism:** Every skill instruction includes a Read-based fallback (Glob for `**/<skill-name>/SKILL.md`) in case the Skill tool is not available to the subagent
 
-### Example Integration in Agent Prompt
+### Why Skills Are Mandatory
 
-For a web app project, the fabric-ux prompt would include:
-```
-Before designing the UI, invoke the Skill tool with skill='frontend-design' to load specialized design guidance. Follow its principles to create distinctive, non-generic interfaces.
-```
-
-For Phase 4 on a web app, the fabric-qa prompt would include:
-```
-For e2e testing, invoke the Skill tool with skill='webapp-testing' to load Playwright testing guidance. Use its server management and reconnaissance-then-action patterns.
-```
-
-For Phase 6, the fabric-docs prompt would include:
-```
-After writing all markdown documentation, invoke the Skill tool with skill='pdf' to generate a polished PDF project summary from the key deliverables.
-```
+Skills contain specialized domain knowledge (design systems, testing patterns, documentation methodology) that fundamentally shapes output quality. Without loading skills first, agents produce generic output. The "MANDATORY FIRST STEP" pattern ensures agents load skill guidance before producing any deliverables.
 
 ## Principles
 
