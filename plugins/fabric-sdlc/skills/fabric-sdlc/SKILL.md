@@ -500,6 +500,51 @@ Example header:
 - If retry fails, document what was accomplished and what remains, then continue to the next phase
 - Never silently skip a phase — always document skips with reasons
 
+## Skill Integration
+
+The Fabric has access to sibling skills from the same marketplace. The PM (you) should instruct agents to use relevant skills when applicable. Agents invoke skills via the `Skill` tool.
+
+### Skill-to-Phase Mapping
+
+| Phase | Agent | Applicable Skills | When to Use |
+|-------|-------|-------------------|-------------|
+| 2 | fabric-ux | `frontend-design` | Web apps with UI — distinctive, non-generic design |
+| 2 | fabric-ux | `canvas-design` | Generate visual architecture diagrams or mockups as PNG/PDF |
+| 3 | fabric-dev-lead | `claude-api` | When the app integrates with Claude/Anthropic API |
+| 3 | fabric-dev-lead | `mcp-builder` | When the app includes an MCP server component |
+| 3 | fabric-dev-lead | `frontend-design` | When implementing web frontend — avoid generic AI aesthetics |
+| 4 | fabric-qa | `webapp-testing` | Web apps — use Playwright via `scripts/with_server.py` for e2e tests |
+| 6 | fabric-docs | `pdf` | Generate polished PDF deliverables (project summary, user guide) |
+| 6 | fabric-docs | `docx` | Generate Word document deliverables if requested |
+| 6 | fabric-docs | `xlsx` | Generate requirement traceability matrix or test coverage spreadsheet |
+| 6 | fabric-docs | `pptx` | Generate project summary presentation if requested |
+| 6 | fabric-docs | `doc-coauthoring` | Structure documentation with reader-testing methodology |
+
+### How to Integrate
+
+When dispatching an agent whose phase has applicable skills:
+
+1. **Check relevance:** Does the project type match the skill's trigger? (e.g., web app → `frontend-design`, Claude API usage → `claude-api`)
+2. **Add to agent prompt:** Include an instruction like: `"If applicable, invoke the Skill tool with skill='<skill-name>' to load specialized guidance before starting that part of your work."`
+3. **Don't force it:** If the project doesn't match (e.g., CLI app → skip `frontend-design`), don't include the instruction. Only integrate skills that genuinely apply.
+
+### Example Integration in Agent Prompt
+
+For a web app project, the fabric-ux prompt would include:
+```
+Before designing the UI, invoke the Skill tool with skill='frontend-design' to load specialized design guidance. Follow its principles to create distinctive, non-generic interfaces.
+```
+
+For Phase 4 on a web app, the fabric-qa prompt would include:
+```
+For e2e testing, invoke the Skill tool with skill='webapp-testing' to load Playwright testing guidance. Use its server management and reconnaissance-then-action patterns.
+```
+
+For Phase 6, the fabric-docs prompt would include:
+```
+After writing all markdown documentation, invoke the Skill tool with skill='pdf' to generate a polished PDF project summary from the key deliverables.
+```
+
 ## Principles
 
 1. **Autonomy:** No human intervention after receiving the business objective
@@ -507,3 +552,4 @@ Example header:
 3. **Pragmatism:** Build what's needed, not what's theoretically optimal
 4. **Quality gates:** Testing and security review before deployment
 5. **Transparency:** The progress log provides a complete audit trail
+6. **Skill leverage:** Use sibling skills when they match the project type — don't reinvent what's already codified
