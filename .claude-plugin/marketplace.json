@@ -8,86 +8,14 @@
   "plugins": [
     {
       "name": "fabric-sdlc",
-      "description": "The Fabric — autonomous 8-agent SDLC team that transforms a business objective into a working application with full documentation, testing, security review, and deployment setup.",
-      "version": "1.2.0",
+      "description": "The Fabric — autonomous SDLC agent team bundled with document processing, design, and developer skills.",
+      "version": "1.3.0",
       "author": {
         "name": "Massimo"
       },
       "source": "./plugins/fabric-sdlc",
       "category": "development",
-      "homepage": "https://github.com/mac8005/fabric-sdlc",
-      "skills": [
-        "./plugins/fabric-sdlc/skills/fabric-sdlc"
-      ]
-    },
-    {
-      "name": "document-skills",
-      "description": "Document processing suite — Excel, Word, PowerPoint, and PDF capabilities",
-      "version": "1.0.0",
-      "author": {
-        "name": "Massimo"
-      },
-      "source": "./plugins/fabric-sdlc",
-      "category": "productivity",
-      "strict": false,
-      "skills": [
-        "./plugins/fabric-sdlc/skills/xlsx",
-        "./plugins/fabric-sdlc/skills/docx",
-        "./plugins/fabric-sdlc/skills/pptx",
-        "./plugins/fabric-sdlc/skills/pdf"
-      ]
-    },
-    {
-      "name": "design-skills",
-      "description": "Visual design and frontend skills — frontend design, canvas design, algorithmic art, brand guidelines, and theme factory",
-      "version": "1.0.0",
-      "author": {
-        "name": "Massimo"
-      },
-      "source": "./plugins/fabric-sdlc",
-      "category": "design",
-      "strict": false,
-      "skills": [
-        "./plugins/fabric-sdlc/skills/frontend-design",
-        "./plugins/fabric-sdlc/skills/canvas-design",
-        "./plugins/fabric-sdlc/skills/algorithmic-art",
-        "./plugins/fabric-sdlc/skills/brand-guidelines",
-        "./plugins/fabric-sdlc/skills/theme-factory"
-      ]
-    },
-    {
-      "name": "developer-skills",
-      "description": "Developer tools — Claude API, MCP builder, skill creator, web artifacts, webapp testing",
-      "version": "1.0.0",
-      "author": {
-        "name": "Massimo"
-      },
-      "source": "./plugins/fabric-sdlc",
-      "category": "development",
-      "strict": false,
-      "skills": [
-        "./plugins/fabric-sdlc/skills/claude-api",
-        "./plugins/fabric-sdlc/skills/mcp-builder",
-        "./plugins/fabric-sdlc/skills/skill-creator",
-        "./plugins/fabric-sdlc/skills/web-artifacts-builder",
-        "./plugins/fabric-sdlc/skills/webapp-testing"
-      ]
-    },
-    {
-      "name": "communication-skills",
-      "description": "Communication and collaboration — doc coauthoring, internal comms, Slack GIF creator",
-      "version": "1.0.0",
-      "author": {
-        "name": "Massimo"
-      },
-      "source": "./plugins/fabric-sdlc",
-      "category": "productivity",
-      "strict": false,
-      "skills": [
-        "./plugins/fabric-sdlc/skills/doc-coauthoring",
-        "./plugins/fabric-sdlc/skills/internal-comms",
-        "./plugins/fabric-sdlc/skills/slack-gif-creator"
-      ]
+      "homepage": "https://github.com/mac8005/fabric-sdlc"
     }
   ]
 }
