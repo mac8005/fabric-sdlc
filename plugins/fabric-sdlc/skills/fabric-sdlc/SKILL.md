@@ -58,6 +58,21 @@ All agent prompts use paths relative to the current directory.
 
 Execute the following phases in order. Use TaskCreate to track every phase.
 
+### CRITICAL: How to Construct Agent Prompts
+
+**The code blocks in each phase below ARE the agent prompts. Use them VERBATIM.**
+
+You MUST follow this exact process when spawning each agent:
+
+1. **Copy the entire code block** from the phase template — this is the base prompt
+2. **Append domain-specific context AFTER the template**, separated by a `--- DOMAIN CONTEXT ---` line
+3. **NEVER remove, rewrite, or skip** the MANDATORY FIRST STEP / MANDATORY SKILL STEP blocks
+4. **NEVER write a custom prompt** that omits the skill invocation instructions
+
+If you catch yourself writing a prompt from scratch instead of copying the template: STOP. Go back and copy the template.
+
+**Why this matters:** Skills contain specialized domain knowledge that fundamentally shapes output quality. Without loading skills first, agents produce generic output. Every prior run where agents skipped skills produced measurably worse results.
+
 ---
 
 ### Phase 0: Project Initiation (YOU — fabric-pm)
@@ -66,14 +81,15 @@ Execute the following phases in order. Use TaskCreate to track every phase.
 2. Derive a short kebab-case project name for the team (e.g., `task-manager-app`)
 3. Create subdirectories: `docs/`, `src/`, `tests/`, `infra/`
 4. **Create the Agent Team:** `TeamCreate({ team_name: "<project-name>", description: "SDLC team for <project>" })`
-5. Create `docs/00-project-charter.md` containing:
+5. **Resolve the skill base path:** Use Glob to search for `**/doc-coauthoring/SKILL.md` starting from `~/.claude/plugins/`. Extract the base directory (everything before `doc-coauthoring/SKILL.md`). Write just that absolute path to `docs/.fabric-skills-path`. This lets all agents find skill files reliably.
+6. Create `docs/00-project-charter.md` containing:
    - Business objective (verbatim from user)
    - Project scope and boundaries
    - Success criteria
    - Identified risks and assumptions
-6. Create `docs/00-progress-log.md` — update this after each phase
-7. Create tasks for all phases using TaskCreate
-8. Dispatch Phase 1
+7. Create `docs/00-progress-log.md` — update this after each phase
+8. Create tasks for all phases using TaskCreate
+9. Dispatch Phase 1
 
 ---
 
@@ -91,7 +107,7 @@ Read `docs/00-project-charter.md` to understand the business objective.
 MANDATORY FIRST STEP — do this BEFORE writing any deliverables:
 1. Invoke the Skill tool: skill='doc-coauthoring'
 2. Read the loaded skill content carefully and apply its methodology
-If the Skill tool is not available, use the Read tool to read the file at the path containing 'doc-coauthoring/SKILL.md' (search with Glob for '**/doc-coauthoring/SKILL.md').
+If the Skill tool is not available, read the file `docs/.fabric-skills-path` to get the skills base directory, then use the Read tool to read `{base}/doc-coauthoring/SKILL.md`.
 DO NOT skip this step. DO NOT start writing deliverables until you have loaded and read the skill.
 
 Produce these deliverables:
@@ -153,7 +169,7 @@ Produce these deliverables:
 
 MANDATORY SKILL STEP — if the app includes architecture diagrams or visual documentation:
 1. Invoke the Skill tool: skill='canvas-design'
-2. If the Skill tool is not available, use Glob to find '**/canvas-design/SKILL.md' and Read that file
+2. If the Skill tool is not available, read `docs/.fabric-skills-path` for the skills base directory, then Read `{base}/canvas-design/SKILL.md`
 3. Follow the loaded skill guidance to generate polished architecture diagrams as PNG/PDF files
 DO NOT skip this step if visual documentation is applicable.
 
@@ -175,7 +191,7 @@ MANDATORY FIRST STEP — you MUST do this BEFORE any design work:
 4. If the project needs decorative generative visuals: invoke skill='canvas-design'
 5. If the project needs interactive generative elements: invoke skill='algorithmic-art'
 
-If the Skill tool is not available for any invocation, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+If the Skill tool is not available for any invocation, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each skill.
 
 DO NOT skip steps 1-2. DO NOT start designing until you have loaded and read the skill content. The skills contain critical design guidance that fundamentally shapes your output quality.
 
@@ -229,7 +245,7 @@ MANDATORY FIRST STEP — invoke applicable skills BEFORE writing any code:
 3. If integrating with Claude/Anthropic API: invoke skill='claude-api'
 4. If building an MCP server component: invoke skill='mcp-builder'
 
-If the Skill tool is not available, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+If the Skill tool is not available, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each applicable skill.
 DO NOT start coding until you have loaded all applicable skills. They contain implementation patterns that are critical to output quality.
 
 Implementation rules:
@@ -275,7 +291,7 @@ Read:
 
 MANDATORY FIRST STEP — if the app has a web UI or API:
 1. Invoke the Skill tool: skill='webapp-testing' — REQUIRED before writing any tests
-2. If the Skill tool is not available, use Glob to find '**/webapp-testing/SKILL.md' and Read that file
+2. If the Skill tool is not available, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/webapp-testing/SKILL.md`
 3. Follow its Playwright testing guidance, server management patterns, and reconnaissance-then-action methodology
 DO NOT write e2e or frontend tests without first loading this skill.
 
@@ -454,7 +470,7 @@ MANDATORY FIRST STEP — invoke these skills BEFORE writing any documentation:
 5. If a project summary presentation is useful: invoke skill='pptx'
 6. If writing stakeholder communications: invoke skill='internal-comms'
 
-If the Skill tool is not available for any invocation, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+If the Skill tool is not available for any invocation, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each skill.
 DO NOT skip steps 1-3. DO NOT start writing documentation until you have loaded the doc-coauthoring skill.
 
 Produce these deliverables:
@@ -491,7 +507,7 @@ After completion, update progress log and proceed to Phase 7.
 MANDATORY SKILL STEP — do this BEFORE presenting the final summary:
 1. Invoke the Skill tool: skill='internal-comms' to format the delivery summary as a professional project completion report
 2. If presenting to stakeholders: invoke skill='pptx' to generate a final project summary presentation deck
-If the Skill tool is not available, use Glob to find '**/<skill-name>/SKILL.md' and Read that file instead.
+If the Skill tool is not available, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each skill.
 DO NOT present the final summary without first loading internal-comms guidance.
 
 1. **Shutdown all teammates** using `SendMessage` with `type: "shutdown_request"` for each active teammate
@@ -589,8 +605,8 @@ The Fabric has access to sibling skills from the same marketplace. The PM (you) 
 Skill invocation is **MANDATORY**, not optional. Every agent prompt already contains "MANDATORY FIRST STEP" blocks. When the PM dispatches agents:
 
 1. **Check relevance:** Does the project type match the skill's trigger? (e.g., web app → `frontend-design`, CLI app → skip it)
-2. **Skills are pre-embedded:** Each agent prompt already includes mandatory skill invocation instructions — no need to add more
-3. **Fallback mechanism:** Every skill instruction includes a Read-based fallback (Glob for `**/<skill-name>/SKILL.md`) in case the Skill tool is not available to the subagent
+2. **Use template prompts VERBATIM:** Copy the code block from the phase template. Append domain context AFTER the template, separated by `--- DOMAIN CONTEXT ---`. NEVER rewrite the template or omit the MANDATORY blocks.
+3. **Skill path is pre-resolved:** Phase 0 writes `docs/.fabric-skills-path` with the absolute path to the skills directory. All fallback instructions reference this file, so agents can always find SKILL.md files regardless of plugin install location.
 
 ### Why Skills Are Mandatory
 
