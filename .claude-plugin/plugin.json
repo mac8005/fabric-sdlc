@@ -1,6 +1,6 @@
 {
   "name": "fabric-sdlc",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "description": "The Fabric — autonomous SDLC agent team bundled with document processing, design, and developer skills from Anthropic's official skills collection.",
   "author": {
     "name": "Massimo",
