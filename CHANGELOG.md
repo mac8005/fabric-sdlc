@@ -4,6 +4,20 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Pre-registered the eight specialist roles as plugin agent types in `agents/`
+  (`fabric-ba`, `fabric-architect`, `fabric-ux`, `fabric-dev-lead`, `fabric-qa`,
+  `fabric-security`, `fabric-devops`, `fabric-docs`). The PM spawns each teammate
+  via `subagent_type`, so per-role tool scoping is now enforced (e.g. the Business
+  Analyst and Technical Writer no longer get Bash) instead of every specialist
+  running as a generic teammate.
+
+### Changed
+- Added the `Skill` tool to the roles whose phases load skills (architect, ux,
+  dev-lead, qa, docs) and synced the "Your Team" table to the enforced toolsets.
+
 ## [2.1.0] - 2026-05-20
 
 ### Changed
