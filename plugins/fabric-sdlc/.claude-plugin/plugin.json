@@ -3,7 +3,19 @@
   "version": "2.0.0",
   "description": "The Fabric — autonomous SDLC agent team bundled with permissively licensed design and developer skills.",
   "author": {
-    "name": "Massimo",
-    "email": ""
-  }
+    "name": "Massimo"
+  },
+  "homepage": "https://github.com/mac8005/fabric-sdlc",
+  "repository": "https://github.com/mac8005/fabric-sdlc",
+  "license": "MIT",
+  "keywords": [
+    "sdlc",
+    "agent-teams",
+    "orchestration",
+    "automation",
+    "scaffolding",
+    "code-generation",
+    "testing",
+    "devops"
+  ]
 }

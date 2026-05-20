@@ -58,6 +58,16 @@ All agent prompts use paths relative to the current directory.
 
 Execute the following phases in order. Use TaskCreate to track every phase.
 
+### Phase Completion Gate
+
+Before marking any phase complete and dispatching the next one:
+
+1. **Verify deliverables exist.** Use Glob/Read to confirm every file the phase was supposed to produce is on disk and non-empty. A teammate reporting "done" is not proof — check the files yourself.
+2. **If a deliverable is missing or empty,** treat it as a failure and follow the Error Handling rules below (retry once, then document and continue).
+3. **Record the result** in `docs/00-progress-log.md`, listing the deliverables you verified.
+
+Only after the gate passes do you `TaskUpdate` the phase to complete and dispatch the next phase.
+
 ### CRITICAL: How to Construct Agent Prompts
 
 **The code blocks in each phase below ARE the agent prompts. Use them VERBATIM.**
@@ -79,8 +89,10 @@ If you catch yourself writing a prompt from scratch instead of copying the templ
 
 1. Analyze the business objective
 2. Derive a short kebab-case project name for the team (e.g., `task-manager-app`)
-3. Create subdirectories: `docs/`, `src/`, `tests/`, `infra/`
-4. **Create the Agent Team:** `TeamCreate({ team_name: "<project-name>", description: "SDLC team for <project>" })`
+3. **Preflight — create the Agent Team FIRST:** `TeamCreate({ team_name: "<project-name>", description: "SDLC team for <project>" })`
+   - Do this BEFORE creating any files or directories, so a missing-capability failure leaves the workspace untouched.
+   - If `TeamCreate` fails because Agent Teams is not enabled, STOP. Tell the user: "The Fabric requires Agent Teams. Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, restart Claude Code, then re-run `/fabric`." Do not proceed.
+4. Create subdirectories: `docs/`, `src/`, `tests/`, `infra/`
 5. Create `docs/00-project-charter.md` containing:
    - Business objective (verbatim from user)
    - Project scope and boundaries
@@ -388,7 +400,7 @@ After QA and Security complete:
 4. If issues exist and iteration count < 3:
    - Spawn `fabric-dev-lead` as a teammate with a fix prompt listing each Critical/High issue
    - After fixes, re-spawn `fabric-qa` and `fabric-security` in parallel
-   - Increment iteration counter
+   - Increment the iteration counter and record it in `docs/00-progress-log.md` (e.g., "Fix iteration 1 of 3") so the loop survives context compaction
 5. If iteration count reaches 3:
    - Document remaining unfixed issues in `docs/07-tech-debt.md`
    - Proceed to Phase 5
@@ -492,6 +504,13 @@ Produce these deliverables:
    - Endpoints with examples
    - Error codes
    - Rate limits (if any)
+
+4. `CLAUDE.md` (project root) — guidance for future Claude Code sessions working on the delivered app
+   - One-paragraph overview of what the app does
+   - Exact, copy-pasteable build, test, lint, and run commands
+   - Project layout: what lives in `src/`, `tests/`, `infra/`, and `docs/`
+   - Key conventions and gotchas to know before changing the code
+   - Pointer to `docs/` for requirements, architecture, and API contracts
 
 Write for the target audience. Be concise and practical. Include examples.
 

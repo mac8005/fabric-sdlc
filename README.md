@@ -125,7 +125,24 @@ claude plugin install fabric-sdlc
 
 ### Bundled Skills
 
-This plugin bundles only permissively licensed design and developer skills. Document export skills for PDF, Word, PowerPoint, and spreadsheets are not bundled; if you have compatible export skills installed separately, Fabric can use them as optional post-processing steps.
+The plugin bundles 12 permissively licensed design and developer skills. Most are wired into the SDLC phases — the PM instructs the relevant agent to load them — and two are general-purpose extras.
+
+| Skill | What it does | SDLC phase |
+|-------|--------------|:----------:|
+| `frontend-design` | Distinctive, non-generic UI design | 2, 3 |
+| `theme-factory` | 10 pre-built professional themes | 2 |
+| `brand-guidelines` | Apply brand colors & typography | 2 |
+| `canvas-design` | PNG/PDF diagrams, mockups, visuals | 2 |
+| `algorithmic-art` | Generative interactive visuals (p5.js) | 2 |
+| `web-artifacts-builder` | Complex React / shadcn/ui artifacts | 3 |
+| `claude-api` | Anthropic API / Agent SDK integration | 3 |
+| `mcp-builder` | Build MCP servers | 3 |
+| `webapp-testing` | Playwright e2e & UI testing | 4 |
+| `internal-comms` | Status reports & delivery summaries | 6, 7 |
+| `skill-creator` | Author and optimize Claude skills | — |
+| `slack-gif-creator` | Slack-optimized animated GIFs | — |
+
+Document export skills for PDF, Word, PowerPoint, and spreadsheets are **not** bundled (licensing). If you have compatible export skills installed separately, Fabric uses them as optional post-processing steps.
 
 ## Usage
 
@@ -143,7 +160,7 @@ After execution, your directory contains a complete project:
 
 ```
 ./
-├── docs/                              # 18 documentation files
+├── docs/                              # 18 core docs (+ 07-tech-debt.md if needed)
 │   ├── 00-project-charter.md          #   Business objective and scope
 │   ├── 00-progress-log.md             #   Full audit trail of all phases
 │   ├── 01-requirements.md             #   Requirements with IDs (REQ-001...)
@@ -161,7 +178,8 @@ After execution, your directory contains a complete project:
 │   ├── 04b-security-review.md         #   OWASP top 10 findings
 │   ├── 05-deployment.md               #   Deployment guide
 │   ├── 06-user-guide.md               #   End-user documentation
-│   └── 06-api-docs.md                 #   API reference
+│   ├── 06-api-docs.md                 #   API reference
+│   └── 07-tech-debt.md                #   Unresolved issues (only if any remain)
 ├── src/                               # Application source code
 ├── tests/                             # Comprehensive test suite
 │   ├── unit/                          #   Unit tests
@@ -172,7 +190,8 @@ After execution, your directory contains a complete project:
 │   ├── Dockerfile                     #   Container definition
 │   ├── docker-compose.yml             #   Local orchestration
 │   └── .github/workflows/            #   CI/CD pipeline
-└── README.md                          # Project documentation
+├── README.md                          # Project documentation
+└── CLAUDE.md                          # Guidance for future Claude Code sessions
 ```
 
 ## The Team

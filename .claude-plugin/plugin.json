@@ -1,9 +1,0 @@
-{
-  "name": "fabric-sdlc",
-  "version": "2.0.0",
-  "description": "The Fabric — autonomous SDLC agent team bundled with permissively licensed design and developer skills.",
-  "author": {
-    "name": "Massimo",
-    "email": ""
-  }
-}
