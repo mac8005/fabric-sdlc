@@ -7,7 +7,7 @@
 
 Fully automate the Software Development Lifecycle (SDLC) using a team of specialized Claude Code agents. The business provides an objective; the team autonomously delivers a fully functional application with complete documentation for traceability.
 
-## Team Composition (9 Agents)
+## Team Composition (PM Coordinator + 8 Specialist Agents)
 
 | # | Role | Agent Name | Phase | Runs In |
 |---|------|-----------|-------|---------|

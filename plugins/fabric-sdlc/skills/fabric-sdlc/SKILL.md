@@ -81,15 +81,14 @@ If you catch yourself writing a prompt from scratch instead of copying the templ
 2. Derive a short kebab-case project name for the team (e.g., `task-manager-app`)
 3. Create subdirectories: `docs/`, `src/`, `tests/`, `infra/`
 4. **Create the Agent Team:** `TeamCreate({ team_name: "<project-name>", description: "SDLC team for <project>" })`
-5. **Resolve the skill base path:** Use Glob to search for `**/doc-coauthoring/SKILL.md` starting from `~/.claude/plugins/`. Extract the base directory (everything before `doc-coauthoring/SKILL.md`). Write just that absolute path to `docs/.fabric-skills-path`. This lets all agents find skill files reliably.
-6. Create `docs/00-project-charter.md` containing:
+5. Create `docs/00-project-charter.md` containing:
    - Business objective (verbatim from user)
    - Project scope and boundaries
    - Success criteria
    - Identified risks and assumptions
-7. Create `docs/00-progress-log.md` — update this after each phase
-8. Create tasks for all phases using TaskCreate
-9. Dispatch Phase 1
+6. Create `docs/00-progress-log.md` — update this after each phase
+7. Create tasks for all phases using TaskCreate
+8. Dispatch Phase 1
 
 ---
 
@@ -105,10 +104,11 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 Read `docs/00-project-charter.md` to understand the business objective.
 
 MANDATORY FIRST STEP — do this BEFORE writing any deliverables:
-1. Invoke the Skill tool: skill='doc-coauthoring'
-2. Read the loaded skill content carefully and apply its methodology
-If the Skill tool is not available, read the file `docs/.fabric-skills-path` to get the skills base directory, then use the Read tool to read `{base}/doc-coauthoring/SKILL.md`.
-DO NOT skip this step. DO NOT start writing deliverables until you have loaded and read the skill.
+1. Build a concise requirements outline from `docs/00-project-charter.md`
+2. Identify the primary users, core jobs to be done, non-goals, assumptions, and open questions
+3. Convert ambiguous objective language into testable requirements with measurable acceptance boundaries
+4. Preserve traceability by assigning IDs before writing prose
+DO NOT skip this step. DO NOT start writing deliverables until this outline exists in your working notes.
 
 Produce these deliverables:
 
@@ -169,7 +169,7 @@ Produce these deliverables:
 
 MANDATORY SKILL STEP — if the app includes architecture diagrams or visual documentation:
 1. Invoke the Skill tool: skill='canvas-design'
-2. If the Skill tool is not available, read `docs/.fabric-skills-path` for the skills base directory, then Read `{base}/canvas-design/SKILL.md`
+2. If the Skill tool is not available, use Glob to search `~/.claude/plugins/` and the current workspace for `**/canvas-design/SKILL.md`, then Read the matching file
 3. Follow the loaded skill guidance to generate polished architecture diagrams as PNG/PDF files
 DO NOT skip this step if visual documentation is applicable.
 
@@ -191,7 +191,7 @@ MANDATORY FIRST STEP — you MUST do this BEFORE any design work:
 4. If the project needs decorative generative visuals: invoke skill='canvas-design'
 5. If the project needs interactive generative elements: invoke skill='algorithmic-art'
 
-If the Skill tool is not available for any invocation, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each skill.
+If the Skill tool is not available for any invocation, use Glob to search `~/.claude/plugins/` and the current workspace for `**/<skill-name>/SKILL.md`, then Read the matching file for each skill.
 
 DO NOT skip steps 1-2. DO NOT start designing until you have loaded and read the skill content. The skills contain critical design guidance that fundamentally shapes your output quality.
 
@@ -245,7 +245,7 @@ MANDATORY FIRST STEP — invoke applicable skills BEFORE writing any code:
 3. If integrating with Claude/Anthropic API: invoke skill='claude-api'
 4. If building an MCP server component: invoke skill='mcp-builder'
 
-If the Skill tool is not available, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each applicable skill.
+If the Skill tool is not available, use Glob to search `~/.claude/plugins/` and the current workspace for `**/<skill-name>/SKILL.md`, then Read the matching file for each applicable skill.
 DO NOT start coding until you have loaded all applicable skills. They contain implementation patterns that are critical to output quality.
 
 Implementation rules:
@@ -291,7 +291,7 @@ Read:
 
 MANDATORY FIRST STEP — if the app has a web UI or API:
 1. Invoke the Skill tool: skill='webapp-testing' — REQUIRED before writing any tests
-2. If the Skill tool is not available, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/webapp-testing/SKILL.md`
+2. If the Skill tool is not available, use Glob to search `~/.claude/plugins/` and the current workspace for `**/webapp-testing/SKILL.md`, then Read the matching file
 3. Follow its Playwright testing guidance, server management patterns, and reconnaissance-then-action methodology
 DO NOT write e2e or frontend tests without first loading this skill.
 
@@ -462,16 +462,14 @@ WORKSPACE: Current working directory. All paths below are relative to it.
 
 Read ALL documents in `docs/` and review the source code in `src/`.
 
-MANDATORY FIRST STEP — invoke these skills BEFORE writing any documentation:
-1. Invoke the Skill tool: skill='doc-coauthoring' — REQUIRED. Load its structured documentation methodology.
-2. After writing markdown docs, invoke skill='pdf' to generate polished PDF versions of key deliverables.
-3. Invoke skill='xlsx' to generate a requirements traceability matrix spreadsheet (REQ IDs → user stories → test cases → results).
-4. If Word format is needed: invoke skill='docx'
-5. If a project summary presentation is useful: invoke skill='pptx'
-6. If writing stakeholder communications: invoke skill='internal-comms'
+MANDATORY FIRST STEP — do this BEFORE writing documentation:
+1. Read the requirements, user stories, architecture, implementation log, test results, security review, and deployment notes
+2. Build a reader-oriented outline for each deliverable: who reads it, what decision or action it supports, and what evidence it must include
+3. Verify traceability coverage from requirement IDs to user stories, implementation notes, tests, and known issues
+4. If writing stakeholder communications, invoke skill='internal-comms'
 
-If the Skill tool is not available for any invocation, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each skill.
-DO NOT skip steps 1-3. DO NOT start writing documentation until you have loaded the doc-coauthoring skill.
+If the Skill tool is not available for `internal-comms`, use Glob to search `~/.claude/plugins/` and the current workspace for `**/internal-comms/SKILL.md`, then Read the matching file.
+DO NOT start writing documentation until the reader-oriented outlines and traceability check are complete.
 
 Produce these deliverables:
 
@@ -496,6 +494,10 @@ Produce these deliverables:
    - Rate limits (if any)
 
 Write for the target audience. Be concise and practical. Include examples.
+
+Optional exports:
+- If the user explicitly requested PDF, Word, spreadsheet, or presentation outputs and the corresponding external skills are installed, use those skills after the Markdown docs are complete.
+- If the external export skills are unavailable, document the skipped export in `docs/00-progress-log.md`; do not fail the project.
 ```
 
 After completion, update progress log and proceed to Phase 7.
@@ -506,8 +508,7 @@ After completion, update progress log and proceed to Phase 7.
 
 MANDATORY SKILL STEP — do this BEFORE presenting the final summary:
 1. Invoke the Skill tool: skill='internal-comms' to format the delivery summary as a professional project completion report
-2. If presenting to stakeholders: invoke skill='pptx' to generate a final project summary presentation deck
-If the Skill tool is not available, read `docs/.fabric-skills-path` to get the skills base directory, then Read `{base}/<skill-name>/SKILL.md` for each skill.
+2. If the Skill tool is not available, use Glob to search `~/.claude/plugins/` and the current workspace for `**/internal-comms/SKILL.md`, then Read the matching file
 DO NOT present the final summary without first loading internal-comms guidance.
 
 1. **Shutdown all teammates** using `SendMessage` with `type: "shutdown_request"` for each active teammate
@@ -579,7 +580,6 @@ The Fabric has access to sibling skills from the same marketplace. The PM (you) 
 
 | Phase | Agent | Applicable Skills | When to Use |
 |-------|-------|-------------------|-------------|
-| 1 | fabric-ba | `doc-coauthoring` | Structure requirements docs with reader-testing methodology |
 | 2 | fabric-architect | `canvas-design` | Generate polished architecture diagrams as PNG/PDF |
 | 2 | fabric-ux | `frontend-design` | Web apps with UI — distinctive, non-generic design |
 | 2 | fabric-ux | `brand-guidelines` | Apply professional brand styling (colors, typography) |
@@ -591,24 +591,18 @@ The Fabric has access to sibling skills from the same marketplace. The PM (you) 
 | 3 | fabric-dev-lead | `claude-api` | When the app integrates with Claude/Anthropic API |
 | 3 | fabric-dev-lead | `mcp-builder` | When the app includes an MCP server component |
 | 4 | fabric-qa | `webapp-testing` | Web apps — use Playwright for e2e tests with server management patterns |
-| 6 | fabric-docs | `doc-coauthoring` | Structure documentation with reader-testing methodology |
-| 6 | fabric-docs | `pdf` | Generate polished PDF deliverables (project summary, user guide) |
-| 6 | fabric-docs | `docx` | Generate Word document deliverables |
-| 6 | fabric-docs | `xlsx` | Generate requirement traceability matrix or test coverage spreadsheet |
-| 6 | fabric-docs | `pptx` | Generate project summary presentation |
 | 6 | fabric-docs | `internal-comms` | Format stakeholder communications and status reports |
 | 7 | fabric-pm | `internal-comms` | Format final delivery summary as professional project completion report |
-| 7 | fabric-pm | `pptx` | Generate final project summary presentation for stakeholders |
 
 ### How to Integrate
 
-Skill invocation is **MANDATORY**, not optional. Every agent prompt already contains "MANDATORY FIRST STEP" blocks. When the PM dispatches agents:
+Applicable skill invocation is **MANDATORY**, not optional. Every agent prompt already contains "MANDATORY FIRST STEP" or "MANDATORY SKILL STEP" blocks. When the PM dispatches agents:
 
 1. **Check relevance:** Does the project type match the skill's trigger? (e.g., web app → `frontend-design`, CLI app → skip it)
 2. **Use template prompts VERBATIM:** Copy the code block from the phase template. Append domain context AFTER the template, separated by `--- DOMAIN CONTEXT ---`. NEVER rewrite the template or omit the MANDATORY blocks.
-3. **Skill path is pre-resolved:** Phase 0 writes `docs/.fabric-skills-path` with the absolute path to the skills directory. All fallback instructions reference this file, so agents can always find SKILL.md files regardless of plugin install location.
+3. **Fallback search:** If the Skill tool is unavailable, use Glob against `~/.claude/plugins/` and the current workspace to find the matching `SKILL.md`. Do not write absolute plugin paths into generated projects.
 
-### Why Skills Are Mandatory
+### Why Applicable Skills Are Mandatory
 
 Skills contain specialized domain knowledge (design systems, testing patterns, documentation methodology) that fundamentally shapes output quality. Without loading skills first, agents produce generic output. The "MANDATORY FIRST STEP" pattern ensures agents load skill guidance before producing any deliverables.
 

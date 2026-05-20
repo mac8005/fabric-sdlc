@@ -1,15 +1,15 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "mac8005-fabric-sdlc",
-  "description": "The Fabric — autonomous SDLC agent team for Claude Code, bundled with document processing, design, and developer skills",
+  "description": "The Fabric — autonomous SDLC agent team for Claude Code, bundled with permissively licensed design and developer skills",
   "owner": {
     "name": "Massimo"
   },
   "plugins": [
     {
       "name": "fabric-sdlc",
-      "description": "The Fabric — autonomous SDLC agent team bundled with document processing, design, and developer skills.",
-      "version": "1.8.0",
+      "description": "The Fabric — autonomous SDLC agent team bundled with permissively licensed design and developer skills.",
+      "version": "2.0.0",
       "author": {
         "name": "Massimo"
       },

@@ -1,7 +1,7 @@
 ---
 description: "Launch The Fabric — autonomous SDLC agent team that builds a full application from a business objective"
 argument-hint: "[business objective]"
-allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent, TeamCreate, TeamDelete, TaskCreate, TaskUpdate, TaskGet, TaskList, SendMessage]
+allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent, Skill, TeamCreate, TeamDelete, TaskCreate, TaskUpdate, TaskGet, TaskList, SendMessage]
 ---
 
 You have been asked to launch The Fabric — an autonomous SDLC agent team.

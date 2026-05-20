@@ -1,18 +1,18 @@
 # The Fabric — Autonomous SDLC Agent Team
 
-> **One prompt. Eight AI agents. A fully built application.**
+> **One prompt. A PM coordinator plus 8 specialist agents. A fully built application.**
 
 <p align="center">
   <img src="assets/demo.svg" alt="The Fabric Demo" width="800"/>
 </p>
 
-Give Claude Code a business objective, and The Fabric orchestrates 8 specialist AI agents to deliver a working application — with complete documentation, tests, security review, and deployment config. No human intervention needed.
+Give Claude Code a business objective, and The Fabric coordinates a project manager role plus 8 specialist agents to deliver a working application — with complete documentation, tests, security review, and deployment config.
 
 ```
 /fabric Build me a task management API with user auth and team workspaces
 ```
 
-That's it. Go grab a coffee.
+The workflow is designed to run end-to-end from that initial objective.
 
 ---
 
@@ -82,10 +82,11 @@ That's it. Go grab a coffee.
                     └────────────────────┘
 ```
 
-## The 7 Phases
+## The SDLC Phases
 
 | Phase | Agent(s) | What happens | Parallel? |
 |:-----:|----------|-------------|:---------:|
+| 0 | Project Manager | Charter, workspace setup, team/task creation | |
 | 1 | Business Analyst | Requirements + user stories with acceptance criteria | |
 | 2 | Architect + UX Engineer | System design, API contracts, wireframes, design system | Yes |
 | 3 | Lead Developer | Full implementation with parallel sub-agents per module | |
@@ -93,6 +94,7 @@ That's it. Go grab a coffee.
 | 4-fix | Lead Developer | Fix critical/high issues, re-test (up to 3 iterations) | |
 | 5 | DevOps Engineer | Dockerfile, CI/CD, deployment docs | |
 | 6 | Technical Writer | README, user guide, API docs | |
+| 7 | Project Manager | Final verification, cleanup, and delivery summary | |
 
 ## Testing Coverage
 
@@ -120,6 +122,10 @@ claude plugin install fabric-sdlc
 
 - Claude Code with **Agent Teams** enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`)
 - Recommended: **Claude Opus** for best orchestration results
+
+### Bundled Skills
+
+This plugin bundles only permissively licensed design and developer skills. Document export skills for PDF, Word, PowerPoint, and spreadsheets are not bundled; if you have compatible export skills installed separately, Fabric can use them as optional post-processing steps.
 
 ## Usage
 
@@ -202,4 +208,4 @@ After execution, your directory contains a complete project:
 
 ## License
 
-MIT
+Fabric-specific code is MIT. Bundled third-party skills retain their own license files; see `THIRD_PARTY_NOTICES.md`.
